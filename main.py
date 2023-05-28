@@ -7,6 +7,7 @@ class Analitic():
         self.colum = colum
         self.list_gorod = pd.read_csv("goroda/koord_russia.csv", delimiter=',')
         self.list_poch_index = pd.read_csv("goroda/postindexes_postindexes.csv", delimiter=',')
+        self.list_gerion = pd.read_csv("goroda/region.csv", delimiter=',')
 
     # Взыращает датафрейм по столбцу адреса
     def read_csv_colum(self):
@@ -38,7 +39,17 @@ class Analitic():
         return  count_index
 
     # количество адресов, содержащих название региона"
-
+    def count_region(self):
+        count_region= 0
+        for addr in self.read_csv_colum():
+            if isinstance(addr, str):
+                for reg in addr.split(','):
+                    for region in self.list_gerion["name"]:
+                        if isinstance(region, str):
+                            if reg.lower() == region.lower():
+                                count_region = count_region + 1
+        print(count_region)
+        return  count_region
 
 
     # количество адресов, содержащих название города
@@ -135,4 +146,4 @@ class Analitic():
 if __name__=="__main__":
     dt = Analitic("test.csv", "Адрес")
     # print(dt.count_not_null_address())
-    dt.kv_count()
+    dt.count_region()
