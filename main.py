@@ -101,6 +101,7 @@ class Analitic():
             if isinstance(addr, str):
                 for street in addr.split():
                     street = street.strip(",")
+                    street = street.strip()
                     if street in list_word_street:
                         count_street= count_street+1
         # print(count_street)
@@ -115,6 +116,7 @@ class Analitic():
             if isinstance(addr, str):
                 for home in addr.split():
                     home = home.strip(",")
+                    home = home.strip()
                     if home in list_home_street:
                         count_home= count_home+1
 
@@ -136,6 +138,7 @@ class Analitic():
             if isinstance(addr, str):
                 for corpus in addr.split():
                     corpus = corpus.strip(",")
+                    corpus = corpus.strip()
                     if corpus in list_corpus_street:
                         count_corpus= count_corpus+1
         # print(count_corpus)
@@ -150,6 +153,8 @@ class Analitic():
             if isinstance(addr, str):
                 for liter in addr.split():
                     liter = liter.strip(",")
+                    liter = liter.strip()
+
                     if liter in list_liter_street:
                         count_liter= count_liter+1
         # print(count_liter)
@@ -163,6 +168,7 @@ class Analitic():
             if isinstance(addr, str):
                 for kv in addr.split():
                     kv = kv.strip(",")
+                    kv = kv.strip()
                     if kv in list_kv:
                         count_kv= count_kv+1
         # print(count_kv)
