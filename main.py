@@ -4,20 +4,82 @@ from tabulate import tabulate
 
 # PATH = '/home/lumpy/PycharmProjects/Addres/'
 
+#   pip insatll pyinstaller
+#   pyinstaller main.py --onefile --windowed --icon полный путь до icon.ico
+
+
 link_dataset = {
     "Перечень государственных учреждений по делам молодежи в Санкт-Петербурге":
         ["https://classif.gov.spb.ru/irsi/7830002078-Perechen-gosudarstvennyh-uchrezhdenij-po-delam-molodezhi-v-Sankt-Peterburge/structure_version/357/",
-         "dataset/Perechen-gosudarstvennyh-uchrezhdenij-po-delam-molodezhi-v-Sankt-Peterburge.csv", "Адрес"],
+         "dataset/Perechen-gosudarstvennyh-uchrezhdenij-po-delam-molodezhi-v-Sankt-Peterburge.csv",
+         "Адрес"],
 
     "Перечень государственных учреждений, подведомственных Комитету по социальной политике Санкт-Петербурга":
         [
             "https://classif.gov.spb.ru/irsi/7825675663-perechen-gosudarstvennyh-uchrezhdenij-podvedomstvennyh-Komitetu-po-socialnoj-politike-Sankt-Peterburga/structure_version/171/",
-            "dataset/perechen-gosudarstvennyh-uchrezhdenij-podvedomstvennyh-Komitetu-po-socialnoj-politike-Sankt-Peterburga.csv", "Адрес"],
-    "TEST":
+            "dataset/perechen-gosudarstvennyh-uchrezhdenij-podvedomstvennyh-Komitetu-po-socialnoj-politike-Sankt-Peterburga.csv",
+            "Адрес"],
+
+    "Информация о представительствах иностранных государств в Санкт-Петербурге":
+        [
+            "https://classif.gov.spb.ru/irsi/7830002590-informaciya-o-predstavitelstvah-inostrannyh-gosudarstv-v-sankt-peterburge/structure_version/290/",
+            "dataset/informaciya-o-nacionalno-kulturnyh-sankt-peterburga.csv",
+            "Адрес"],
+
+    "Театры":
+        [
+            "https://classif.gov.spb.ru/irsi/7842489089-teatry/structure_version/649/",
+            "dataset/teatry.csv",
+            "Адрес (ручной)"],
+
+    "Реестр аккредитованных образовательных учреждений":
+        [
+            "https://classif.gov.spb.ru/irsi/7830002053-Reestr-akkreditovannyh-obrazovatelnyh-uchrezhdenij/structure_version/567/",
+            "dataset/Reestr-akkreditovannyh-obrazovatelnyh-uchrezhdenij.csv",
+            "Адрес"],
+
+    "Сведения о судебных участках мировых судей Санкт-Петербурга":
+        [
+            "https://classif.gov.spb.ru/irsi/7842005651-svedeniya-o-sudebnyh-uchastkah-mirovyh-sudej-sankt-peterburga/structure_version/438/",
+            "dataset/svedeniya-o-sudebnyh-uchastkah-mirovyh-sudej-sankt-peterburga.csv",
+            "Адрес"],
+
+    "Информация о спортивной подготовке детей и молодежи в Санкт-Петербурге":
+        [
+            "https://classif.gov.spb.ru/irsi/7830002078-Informaciya-o-sportivnoj-podgotovke-detej-i-molodezhi-v-Sankt-Peterburge/structure_version/350/",
+            "dataset/Informaciya-o-sportivnoj-podgotovke-detej-i-molodezhi-v-Sankt-Peterburge.csv",
+            "Адрес учреждения"],
+
+    "Катки и лыжные трассы Санкт-Петербурга":
+        [
+            "https://classif.gov.spb.ru/irsi/7814348015-Katki-i-lyzhnye-trassy-SPbtwo/structure_version/618/",
+            "dataset/Katki-i-lyzhnye-trassy-Sankt-Peterburga.csv",
+            "Адрес"],
+
+    "Перечень государственных учреждений культуры на территории района Санкт-Петербурга":
+        [
+            "https://classif.gov.spb.ru/irsi/7830002078-Perechen-gosudarstvennyh-uchrezhdenij-kultury-na-territorii-rajona-Sankt-Peterburga/structure_version/324/",
+            "dataset/Perechen-gosudarstvennyh-uchrezhdenij-kultury-na-territorii-rajona-Sankt-Peterburga.csv",
+            "Адрес"],
+
+    "Информация о лечебно-профилактических учреждениях Санкт-Петербурга":
+        [
+            "https://classif.gov.spb.ru/irsi/7808043833-info_health_service/structure_version/327/",
+            "dataset/info_health_service.csv",
+            "Адрес"],
+
+"Объекты гражданского и промышленного строительства (стройки)":
+        [
+            "https://classif.gov.spb.ru/irsi/7830002342-obuekty-grazhdanskogo-i-promyshlennogo-stroitelstva-strojki/structure_version/422/",
+            "dataset/оbuekty-grazhdanskogo-i-promyshlennogo-stroitelstva-strojki.csv",
+            "Адрес"],
+
+"TEST":
         [
             "TEST",
             "dataset/test.csv",
             "Адрес"],
+
 }
 
 
@@ -96,7 +158,7 @@ class Analitic():
     # количество адресов, содержащих название улицы
     def street_count(self):
         count_street  = 0
-        list_word_street = [ "улица", "ул.", ]
+        list_word_street = [ "улица", "ул.", "проспект", "пр.", "наб.", "набережная", "переулок", "пер."]
         for addr in self.read_csv_colum():
             if isinstance(addr, str):
                 for street in addr.split():
@@ -196,5 +258,4 @@ if __name__=="__main__":
     for name, link in link_dataset.items():
         dt = Analitic(link[1], link[2], )
         dt.view_table(name, link[0])
-    # print(dt.count_not_null_address())
 
